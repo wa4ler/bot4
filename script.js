@@ -10,25 +10,22 @@ document.getElementById("container3D").appendChild(renderer.domElement);
 
 scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 
-
 const addDirectionalLight = (x, y, z, intensity) => {
     const light = new THREE.DirectionalLight(0xffffff, intensity);
     light.position.set(x, y, z);
     scene.add(light);
-  }
+};
 
-  // Функция для добавления точечного света с экстремальной интенсивностью
-  const addPointLight = (x, y, z, intensity) => {
+const addPointLight = (x, y, z, intensity) => {
     const light = new THREE.PointLight(0xffffff, intensity, 1200);
     light.position.set(x, y, z);
     scene.add(light);
-  }
+};
 
-  // Добавляем направленные и точечные света с очень высокой интенсивностью
-  addDirectionalLight(75, 75, 75, 10);
-  addDirectionalLight(-75, 75, 75, 10);
-  addPointLight(0, 75, 25, 8);
-  addPointLight(0, -75, 25, 8);
+addDirectionalLight(75, 75, 75, 10);
+addDirectionalLight(-75, 75, 75, 10);
+addPointLight(0, 75, 25, 8);
+addPointLight(0, -75, 25, 8);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableZoom = false;
@@ -36,7 +33,6 @@ controls.enableRotate = false;
 
 camera.position.set(0, 0, 100);
 controls.update();
-
 
 let coin = null;
 const loader = new GLTFLoader();
@@ -54,11 +50,10 @@ loader.load('scene.gltf', function (gltf) {
 function animate() {
     requestAnimationFrame(animate);
     if (!flipping && coin) {
-        coin.rotation.y += 0.03;  // Небольшое вращение монеты, когда не происходит flip
+        coin.rotation.y += 0.03; // Slight rotation when not flipping
     }
     renderer.render(scene, camera);
 }
-
 
 let flipping = false;
 let flipStartTime = 0;
@@ -72,22 +67,36 @@ document.getElementById("flipButton").addEventListener("click", function () {
     }
 });
 
+const text = {
+    'ru': {
+        'orel': 'ОРЕЛ',
+        'reshka': 'РЕШКА',
+        'btn': 'ВРАЩАТЬ'
+    },
+    'en': {
+        'orel': 'HEAD',
+        'reshka': 'TAIL',
+        'btn': 'FLIP'
+    },
+};
+
 function flipCoin() {
-    requestAnimationFrame(function(timestamp) {
+    requestAnimationFrame(function (timestamp) {
         if (flipping) {
             let elapsed = timestamp - flipStartTime;
             let progress = elapsed / flipDuration;
             if (progress < 1) {
-                let yPosition = 13 + 37 * Math.sin(Math.PI * progress); // Подскок вверх и вниз
-                let rotationProgress = Math.PI * 10 * progress; // Более быстрое вращение
+                let yPosition = 13 + 37 * Math.sin(Math.PI * progress); // Up and down bounce
+                let rotationProgress = Math.PI * 10 * progress; // Faster rotation
                 coin.position.y = yPosition;
                 coin.rotation.y = rotationProgress;
-                flipCoin(); // Продолжить анимацию flip
+                flipCoin(); // Continue flip animation
             } else {
                 flipping = false;
                 coin.position.y = 13;
-                coin.rotation.y = Math.PI * 10; // Установить окончательное положение монеты после flip
-                let result = (Math.random() < 0.5) ? "Head" : "Tail";
+                coin.rotation.y = Math.PI * 10; // Set final position after flip
+                const languageCode = window.Telegram.WebApp.initDataUnsafe.user.language_code || 'en';
+                const result = (Math.random() < 0.5) ? text[languageCode].orel || text['en'].orel : text[languageCode].reshka || text['en'].reshka;
                 document.getElementById("resultText").textContent = result;
                 document.getElementById("resultText").style.display = 'block';
             }
@@ -95,9 +104,27 @@ function flipCoin() {
     });
 }
 
-
 window.addEventListener("resize", function () {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+function displayBotUsername() {
+    const resultTextElement = document.getElementById('flipButton');
+    const languageCode = window.Telegram.WebApp.initDataUnsafe.user.language_code || 'en';
+    resultTextElement.textContent = text[languageCode].btn;
+}
+
+// Call the function when the page loads
+document.addEventListener('DOMContentLoaded', (event) => {
+    const resultTextElement = document.getElementById('flipButton');
+    const languageCode = window.Telegram.WebApp.initDataUnsafe.user.language_code || 'en';
+    resultTextElement.textContent = text[languageCode].btn;
+
+    const resultTextElement2 = document.getElementById('botName');
+    const botName = window.Telegram.WebApp.initDataUnsafe.start_param || 'Unknown';
+
+    resultTextElement2.textContent = botName;
+
 });
