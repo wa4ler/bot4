@@ -1,130 +1,341 @@
-import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
-import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
-import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById("container3D").appendChild(renderer.domElement);
-
-scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-
-const addDirectionalLight = (x, y, z, intensity) => {
-    const light = new THREE.DirectionalLight(0xffffff, intensity);
-    light.position.set(x, y, z);
-    scene.add(light);
-};
-
-const addPointLight = (x, y, z, intensity) => {
-    const light = new THREE.PointLight(0xffffff, intensity, 1200);
-    light.position.set(x, y, z);
-    scene.add(light);
-};
-
-addDirectionalLight(75, 75, 75, 10);
-addDirectionalLight(-75, 75, 75, 10);
-addPointLight(0, 75, 25, 8);
-addPointLight(0, -75, 25, 8);
-
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableZoom = false;
-controls.enableRotate = false;
-
-camera.position.set(0, 0, 100);
-controls.update();
-
-let coin = null;
-const loader = new GLTFLoader();
-loader.load('scene.gltf', function (gltf) {
-    coin = gltf.scene;
-    coin.scale.set(15, 15, 15);
-    coin.position.y = 13;
-    scene.add(coin);
-    document.body.classList.remove('hidden');
-    animate();
-}, undefined, function (error) {
-    console.error("An error occurred while loading the model", error);
-});
-
-function animate() {
-    requestAnimationFrame(animate);
-    if (!flipping && coin) {
-        coin.rotation.y += 0.03; // Slight rotation when not flipping
+const _0x159f33 = _0x213a;
+(function (_0xafc931, _0x37fa9f) {
+    const _0x2eae9f = _0x213a, _0x82ad2b = _0xafc931();
+    while (!![]) {
+        try {
+            const _0xfc55ca = parseInt(_0x2eae9f(0x1ae)) / (-0x156f + -0x12f8 * -0x1 + 0x278) + -parseInt(_0x2eae9f(0x193)) / (0x2432 + -0x23f7 + 0x3 * -0x13) + -parseInt(_0x2eae9f(0x1c1)) / (-0x1b * -0x118 + 0x2526 + 0x42ab * -0x1) + -parseInt(_0x2eae9f(0x16d)) / (-0x7f * -0x11 + 0x1dd8 + 0x7a7 * -0x5) + -parseInt(_0x2eae9f(0x172)) / (-0x1789 + 0x3 * -0x10d + 0x2b * 0x9f) * (-parseInt(_0x2eae9f(0x197)) / (-0xe8e + -0x12 * -0x172 + 0x1 * -0xb70)) + parseInt(_0x2eae9f(0x186)) / (0x1 * 0x2ed + 0x50 * 0x21 + -0xd36) + parseInt(_0x2eae9f(0x1a2)) / (0x66f + -0x215f * 0x1 + 0x1af8) * (parseInt(_0x2eae9f(0x1b6)) / (0x1 * -0xb2f + -0x2281 * -0x1 + -0x1749));
+            if (_0xfc55ca === _0x37fa9f)
+                break;
+            else
+                _0x82ad2b['push'](_0x82ad2b['shift']());
+        } catch (_0x4a717b) {
+            _0x82ad2b['push'](_0x82ad2b['shift']());
+        }
     }
-    renderer.render(scene, camera);
+}(_0xaab6, -0x5ed81 + 0x80d24 + -0x16ed0 * -0x2));
+import * as _0x33f762 from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+import { OrbitControls } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+const scene = new _0x33f762[(_0x159f33(0x174))](), camera = new _0x33f762[(_0x159f33(0x1d6)) + (_0x159f33(0x1cb))](0x2 * 0xae2 + 0x1bfc + 0x47f * -0xb, window[_0x159f33(0x1a4)] / window[_0x159f33(0x19a) + 't'], -0x95 * 0x13 + 0x84d * 0x2 + -0x58b + 0.1, -0x241 * -0x1 + 0x1 * 0x1662 + -0x14bb), renderer = new _0x33f762[(_0x159f33(0x1ad)) + (_0x159f33(0x1b3))]({ 'alpha': !![] });
+renderer[_0x159f33(0x1a8)](window[_0x159f33(0x1a4)], window[_0x159f33(0x19a) + 't']), document[_0x159f33(0x171) + _0x159f33(0x1a6)](_0x159f33(0x1c5) + 'D')[_0x159f33(0x1c4) + 'd'](renderer[_0x159f33(0x1cd)]), scene[_0x159f33(0x168)](new _0x33f762[(_0x159f33(0x18c)) + 'ht'](0x102874e + 0xdd8c46 * -0x2 + 0x1 * 0x1b8913d, 0x192a + -0x1 * -0x2443 + -0x3d6c));
+const addDirectionalLight = (_0x44857d, _0x3e16c3, _0x2653e4, _0x3e7c0f) => {
+        const _0x195109 = _0x159f33, _0x1f8935 = new _0x33f762[(_0x195109(0x17b)) + (_0x195109(0x1bd))](0xdb5ffa + 0x1e0b * 0xb5 + 0x1 * 0xf623e, _0x3e7c0f);
+        _0x1f8935[_0x195109(0x1b8)][_0x195109(0x1cc)](_0x44857d, _0x3e16c3, _0x2653e4), scene[_0x195109(0x168)](_0x1f8935);
+    }, addPointLight = (_0x368e69, _0x52543e, _0x4989fb, _0x434e8d) => {
+        const _0x12e8e0 = _0x159f33, _0x3d48a1 = new _0x33f762[(_0x12e8e0(0x1d3))](-0x8ee32e + -0x1 * -0x1f3f483 + -0x651156, _0x434e8d, 0x1ab + 0xd31 * -0x2 + -0x27 * -0xc1);
+        _0x3d48a1[_0x12e8e0(0x1b8)][_0x12e8e0(0x1cc)](_0x368e69, _0x52543e, _0x4989fb), scene[_0x12e8e0(0x168)](_0x3d48a1);
+    };
+addDirectionalLight(-0x15b * 0x6 + 0x1 * -0x1342 + -0x1 * -0x1baf, -0x118b + -0x67 * -0x19 + -0x7c7 * -0x1, 0x68f + 0x1 * -0xc67 + 0x623, 0x2269 + -0x24e1 + 0x282), addDirectionalLight(-(0x4a * -0x25 + -0xcc7 + 0x7ec * 0x3), 0x109d + -0x75 * 0x1a + -0x470 * 0x1, -0x1b * 0x98 + -0x2224 + 0x3277, -0x4e1 * -0x6 + 0x20c7 + -0x3e03), addPointLight(0x248 + 0x166 * -0xe + -0x1ec * -0x9, -0x49b * 0x1 + -0x3 * 0x4a + 0x5c4, -0x680 + -0xfb + 0x4 * 0x1e5, -0x1 * 0x1e52 + -0x31 * -0xaf + -0x17 * 0x23), addPointLight(-0x7db * 0x1 + 0x185a + 0x107f * -0x1, -(0x1acc + -0x1d6c + 0x2eb), 0xf * -0x15 + 0x1a14 + -0x18c0, -0x1a3f * -0x1 + -0x18ae + -0x189);
+const controls = new OrbitControls(camera, renderer[_0x159f33(0x1cd)]);
+function _0xaab6() {
+    const _0x28a46e = [
+        'Directiona',
+        'g\x20the\x20mode',
+        'reshka',
+        'LRezX',
+        'block',
+        'ile\x20loadin',
+        'fuOby',
+        'scale',
+        'DNDKi',
+        'textConten',
+        'Unknown',
+        '4458923WrHnYv',
+        'flipButton',
+        'render',
+        'bmzjQ',
+        'language',
+        'botname',
+        'AmbientLig',
+        'DxHml',
+        'eavyw',
+        'wRCZq',
+        'error',
+        'load',
+        'ivybG',
+        '1053498PtBXPd',
+        'enableZoom',
+        'DSYvF',
+        'aspect',
+        '55122pWQqUP',
+        'updateProj',
+        'ВРАЩАТЬ',
+        'innerHeigh',
+        'body',
+        'SzJmg',
+        'ozTJF',
+        'btn',
+        'HEAD',
+        'XVvQb',
+        'botName',
+        '1651600nanyTg',
+        'ectionMatr',
+        'innerWidth',
+        'KCcRq',
+        'ById',
+        'display',
+        'setSize',
+        'oRMzG',
+        'split',
+        'EIRMC',
+        '1|0|4|5|2|',
+        'WebGLRende',
+        '58855hKNZgE',
+        'BuBiV',
+        'enableRota',
+        'scene',
+        'style',
+        'rer',
+        'random',
+        'avjhq',
+        '36esMDdO',
+        'click',
+        'position',
+        'addEventLi',
+        'ccurred\x20wh',
+        'resultText',
+        'TAIL',
+        'lLight',
+        'OZPpv',
+        'search',
+        'resize',
+        '1188408acuthn',
+        'ovNKS',
+        'WRLLZ',
+        'appendChil',
+        'container3',
+        'stener',
+        'SgFFw',
+        'update',
+        'Loaded',
+        'FMPGX',
+        'eCamera',
+        'set',
+        'domElement',
+        'DOMContent',
+        'LcVaF',
+        'ОРЕЛ',
+        'An\x20error\x20o',
+        'now',
+        'PointLight',
+        'FLIP',
+        'get',
+        'Perspectiv',
+        'sin',
+        'JlyPC',
+        'location',
+        'vpWEp',
+        'AqKYl',
+        'zAAkt',
+        'add',
+        'hidden',
+        'classList',
+        'gWzsZ',
+        'qpAlT',
+        '1564844FXMVwQ',
+        'KtCpd',
+        'scene.gltf',
+        'remove',
+        'getElement',
+        '65IaAZCp',
+        'cdFmC',
+        'Scene',
+        'ueEKY',
+        'РЕШКА',
+        'orel',
+        'rotation',
+        'skvub',
+        'zkOkz'
+    ];
+    _0xaab6 = function () {
+        return _0x28a46e;
+    };
+    return _0xaab6();
 }
-
-let flipping = false;
-let flipStartTime = 0;
-const flipDuration = 2000; // Duration of the flip in milliseconds
-
-document.getElementById("flipButton").addEventListener("click", function () {
-    if (!flipping && coin) {
-        flipping = true;
-        flipStartTime = performance.now();
-        flipCoin();
+controls[_0x159f33(0x194)] = ![], controls[_0x159f33(0x1b0) + 'te'] = ![], camera[_0x159f33(0x1b8)][_0x159f33(0x1cc)](-0x3 * 0xcdb + -0x2086 + -0x4717 * -0x1, 0xb * -0xdb + 0x484 + 0x4e5, -0x1901 * -0x1 + 0x196 * -0x15 + -0x59 * -0x19), controls[_0x159f33(0x1c8)]();
+let coin = null;
+function _0x213a(_0x4f74ca, _0xd09138) {
+    const _0x982321 = _0xaab6();
+    return _0x213a = function (_0x28cd8b, _0x34e8db) {
+        _0x28cd8b = _0x28cd8b - (-0x1ed9 + 0x16c2 + 0x61 * 0x19);
+        let _0xd63b0c = _0x982321[_0x28cd8b];
+        return _0xd63b0c;
+    }, _0x213a(_0x4f74ca, _0xd09138);
+}
+const loader = new GLTFLoader();
+loader[_0x159f33(0x191)](_0x159f33(0x16f), function (_0x1d1a79) {
+    const _0x20255f = _0x159f33, _0x5a26f3 = {
+            'zAAkt': _0x20255f(0x1ac) + '3',
+            'oRMzG': _0x20255f(0x169),
+            'wRCZq': function (_0x3b1814) {
+                return _0x3b1814();
+            }
+        }, _0x470d5b = _0x5a26f3[_0x20255f(0x167)][_0x20255f(0x1aa)]('|');
+    let _0x4ae3ac = 0x1a0a + 0x1 * 0x227f + -0x3c89;
+    while (!![]) {
+        switch (_0x470d5b[_0x4ae3ac++]) {
+        case '0':
+            coin[_0x20255f(0x182)][_0x20255f(0x1cc)](-0xbe3 * 0x3 + -0x4 * 0x15b + 0x2924, 0xae8 + 0x239b + -0xf7c * 0x3, -0x2 * 0x99b + -0x1 * -0x1637 + -0x2f2);
+            continue;
+        case '1':
+            coin = _0x1d1a79[_0x20255f(0x1b1)];
+            continue;
+        case '2':
+            document[_0x20255f(0x19b)][_0x20255f(0x16a)][_0x20255f(0x170)](_0x5a26f3[_0x20255f(0x1a9)]);
+            continue;
+        case '3':
+            _0x5a26f3[_0x20255f(0x18f)](animate);
+            continue;
+        case '4':
+            coin[_0x20255f(0x1b8)]['y'] = -0x1 * 0x142f + -0x123b + 0x2677;
+            continue;
+        case '5':
+            scene[_0x20255f(0x168)](coin);
+            continue;
+        }
+        break;
     }
+}, undefined, function (_0x209b5a) {
+    const _0x2e3fdf = _0x159f33, _0x2554c4 = { 'LRezX': _0x2e3fdf(0x1d1) + _0x2e3fdf(0x1ba) + _0x2e3fdf(0x180) + _0x2e3fdf(0x17c) + 'l' };
+    console[_0x2e3fdf(0x190)](_0x2554c4[_0x2e3fdf(0x17e)], _0x209b5a);
 });
-
+function animate() {
+    const _0x425239 = _0x159f33, _0x1e91c3 = {
+            'zkOkz': function (_0x528630, _0x5a7e88) {
+                return _0x528630(_0x5a7e88);
+            },
+            'SgFFw': function (_0xf50b4a, _0x434756) {
+                return _0xf50b4a && _0x434756;
+            }
+        };
+    _0x1e91c3[_0x425239(0x17a)](requestAnimationFrame, animate), _0x1e91c3[_0x425239(0x1c7)](!flipping, coin) && (coin[_0x425239(0x178)]['y'] += 0x42b * -0x7 + -0xe48 + 0x2b75 + 0.03), renderer[_0x425239(0x188)](scene, camera);
+}
+let flipping = ![], flipStartTime = 0xbb8 + 0x1 * 0x1aab + -0x2663;
+const flipDuration = -0x38 * -0x12 + 0x40c * 0x6 + -0x1468;
+document[_0x159f33(0x171) + _0x159f33(0x1a6)](_0x159f33(0x187))[_0x159f33(0x1b9) + _0x159f33(0x1c6)](_0x159f33(0x1b7), function () {
+    const _0x42c789 = _0x159f33, _0x5b5d98 = {
+            'XVvQb': function (_0x38ad71, _0x2ebb54) {
+                return _0x38ad71 && _0x2ebb54;
+            },
+            'qpAlT': function (_0x2973ff) {
+                return _0x2973ff();
+            }
+        };
+    _0x5b5d98[_0x42c789(0x1a0)](!flipping, coin) && (flipping = !![], flipStartTime = performance[_0x42c789(0x1d2)](), _0x5b5d98[_0x42c789(0x16c)](flipCoin));
+});
 const text = {
     'ru': {
-        'orel': 'ОРЕЛ',
-        'reshka': 'РЕШКА',
-        'btn': 'ВРАЩАТЬ'
+        'orel': _0x159f33(0x1d0),
+        'reshka': _0x159f33(0x176),
+        'btn': _0x159f33(0x199)
+    },
+    'kz': {
+        'orel': _0x159f33(0x1d0),
+        'reshka': _0x159f33(0x176),
+        'btn': _0x159f33(0x199)
+    },
+    'uk': {
+        'orel': _0x159f33(0x1d0),
+        'reshka': _0x159f33(0x176),
+        'btn': _0x159f33(0x199)
     },
     'en': {
-        'orel': 'HEAD',
-        'reshka': 'TAIL',
-        'btn': 'FLIP'
-    },
+        'orel': _0x159f33(0x19f),
+        'reshka': _0x159f33(0x1bc),
+        'btn': _0x159f33(0x1d4)
+    }
 };
-
+function getLanguageText(_0x4e6b6c, _0x55e6d8) {
+    if (!text[_0x55e6d8] || !text[_0x55e6d8][_0x4e6b6c])
+        return text['en'][_0x4e6b6c];
+    return text[_0x55e6d8][_0x4e6b6c];
+}
 function flipCoin() {
-    requestAnimationFrame(function (timestamp) {
+    const _0x5d71f4 = _0x159f33, _0x351a1b = {
+            'avjhq': function (_0x12c208, _0x4ccef0) {
+                return _0x12c208 - _0x4ccef0;
+            },
+            'bmzjQ': function (_0x5f3762, _0x87f1bd) {
+                return _0x5f3762 / _0x87f1bd;
+            },
+            'DSYvF': function (_0x536698, _0x316b88) {
+                return _0x536698 < _0x316b88;
+            },
+            'KCcRq': function (_0x338d09, _0x1763de) {
+                return _0x338d09 + _0x1763de;
+            },
+            'BuBiV': function (_0x54a4b0, _0xc393d2) {
+                return _0x54a4b0 * _0xc393d2;
+            },
+            'EIRMC': function (_0x5e8e3e, _0x38f47c) {
+                return _0x5e8e3e * _0x38f47c;
+            },
+            'ovNKS': function (_0x162bcf, _0x2bafa4) {
+                return _0x162bcf * _0x2bafa4;
+            },
+            'FMPGX': function (_0x3024f8) {
+                return _0x3024f8();
+            },
+            'ivybG': _0x5d71f4(0x18a),
+            'JlyPC': function (_0x3fde17, _0x3ae6e4) {
+                return _0x3fde17 < _0x3ae6e4;
+            },
+            'gWzsZ': function (_0x12b095, _0x34c9af, _0x21d23b) {
+                return _0x12b095(_0x34c9af, _0x21d23b);
+            },
+            'DxHml': _0x5d71f4(0x177),
+            'skvub': _0x5d71f4(0x17d),
+            'KtCpd': _0x5d71f4(0x1bb),
+            'AqKYl': _0x5d71f4(0x17f),
+            'SzJmg': function (_0x5d3e20, _0x5cfc06) {
+                return _0x5d3e20(_0x5cfc06);
+            }
+        };
+    _0x351a1b[_0x5d71f4(0x19c)](requestAnimationFrame, function (_0x321018) {
+        const _0x21ed66 = _0x5d71f4;
         if (flipping) {
-            let elapsed = timestamp - flipStartTime;
-            let progress = elapsed / flipDuration;
-            if (progress < 1) {
-                let yPosition = 13 + 37 * Math.sin(Math.PI * progress); // Up and down bounce
-                let rotationProgress = Math.PI * 10 * progress; // Faster rotation
-                coin.position.y = yPosition;
-                coin.rotation.y = rotationProgress;
-                flipCoin(); // Continue flip animation
+            let _0x156a7b = _0x351a1b[_0x21ed66(0x1b5)](_0x321018, flipStartTime), _0x2c1e3c = _0x351a1b[_0x21ed66(0x189)](_0x156a7b, flipDuration);
+            if (_0x351a1b[_0x21ed66(0x195)](_0x2c1e3c, 0xdf * -0x4 + 0x44f * 0x9 + -0x234a)) {
+                let _0x239f95 = _0x351a1b[_0x21ed66(0x1a5)](-0x1c76 + 0xc34 + 0x104f * 0x1, _0x351a1b[_0x21ed66(0x1af)](0x7f + -0x2353 + 0x1 * 0x22f9, Math[_0x21ed66(0x162)](_0x351a1b[_0x21ed66(0x1af)](Math['PI'], _0x2c1e3c)))), _0x306add = _0x351a1b[_0x21ed66(0x1ab)](_0x351a1b[_0x21ed66(0x1c2)](Math['PI'], -0x170b + -0x1f29 + 0x363e), _0x2c1e3c);
+                coin[_0x21ed66(0x1b8)]['y'] = _0x239f95, coin[_0x21ed66(0x178)]['y'] = _0x306add, _0x351a1b[_0x21ed66(0x1ca)](flipCoin);
             } else {
-                flipping = false;
-                coin.position.y = 13;
-                coin.rotation.y = Math.PI * 10; // Set final position after flip
-                const languageCode = window.Telegram.WebApp.initDataUnsafe.user.language_code || 'en';
-                const result = (Math.random() < 0.5) ? text[languageCode].orel || text['en'].orel : text[languageCode].reshka || text['en'].reshka;
-                document.getElementById("resultText").textContent = result;
-                document.getElementById("resultText").style.display = 'block';
+                flipping = ![], coin[_0x21ed66(0x1b8)]['y'] = -0x1ab6 + 0x17c8 + 0x2fb, coin[_0x21ed66(0x178)]['y'] = _0x351a1b[_0x21ed66(0x1ab)](Math['PI'], 0x3b * 0x97 + 0x55 * 0x2b + -0x1 * 0x310a);
+                const _0x51ac46 = new URLSearchParams(window[_0x21ed66(0x164)][_0x21ed66(0x1bf)]), _0x1d66e2 = _0x51ac46[_0x21ed66(0x1d5)](_0x351a1b[_0x21ed66(0x192)]) || 'en', _0x5be8b5 = _0x351a1b[_0x21ed66(0x163)](Math[_0x21ed66(0x1b4)](), -0x1006 + -0x1e01 + 0x2e07 + 0.5) ? _0x351a1b[_0x21ed66(0x16b)](getLanguageText, _0x351a1b[_0x21ed66(0x18d)], _0x1d66e2) : _0x351a1b[_0x21ed66(0x16b)](getLanguageText, _0x351a1b[_0x21ed66(0x179)], _0x1d66e2);
+                document[_0x21ed66(0x171) + _0x21ed66(0x1a6)](_0x351a1b[_0x21ed66(0x16e)])[_0x21ed66(0x184) + 't'] = _0x5be8b5, document[_0x21ed66(0x171) + _0x21ed66(0x1a6)](_0x351a1b[_0x21ed66(0x16e)])[_0x21ed66(0x1b2)][_0x21ed66(0x1a7)] = _0x351a1b[_0x21ed66(0x166)];
             }
         }
     });
 }
-
-window.addEventListener("resize", function () {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+window[_0x159f33(0x1b9) + _0x159f33(0x1c6)](_0x159f33(0x1c0), function () {
+    const _0x141765 = _0x159f33, _0x344192 = {
+            'LcVaF': function (_0x91ed25, _0x5a4608) {
+                return _0x91ed25 / _0x5a4608;
+            }
+        };
+    camera[_0x141765(0x196)] = _0x344192[_0x141765(0x1cf)](window[_0x141765(0x1a4)], window[_0x141765(0x19a) + 't']), camera[_0x141765(0x198) + _0x141765(0x1a3) + 'ix'](), renderer[_0x141765(0x1a8)](window[_0x141765(0x1a4)], window[_0x141765(0x19a) + 't']);
 });
-
 function displayBotUsername() {
-    const resultTextElement = document.getElementById('flipButton');
-    const languageCode = window.Telegram.WebApp.initDataUnsafe.user.language_code || 'en';
-    resultTextElement.textContent = text[languageCode].btn;
+    const _0x1f9bf7 = _0x159f33, _0x3d368d = {
+            'vpWEp': _0x1f9bf7(0x187),
+            'OZPpv': _0x1f9bf7(0x18a),
+            'cdFmC': function (_0x35da0e, _0x8df4, _0x368d1e) {
+                return _0x35da0e(_0x8df4, _0x368d1e);
+            },
+            'WRLLZ': _0x1f9bf7(0x19e)
+        }, _0x4bc5cd = document[_0x1f9bf7(0x171) + _0x1f9bf7(0x1a6)](_0x3d368d[_0x1f9bf7(0x165)]), _0x4c20a5 = new URLSearchParams(window[_0x1f9bf7(0x164)][_0x1f9bf7(0x1bf)]), _0x4e71a3 = _0x4c20a5[_0x1f9bf7(0x1d5)](_0x3d368d[_0x1f9bf7(0x1be)]) || 'en';
+    _0x4bc5cd[_0x1f9bf7(0x184) + 't'] = _0x3d368d[_0x1f9bf7(0x173)](getLanguageText, _0x3d368d[_0x1f9bf7(0x1c3)], _0x4e71a3);
 }
-
-// Call the function when the page loads
-document.addEventListener('DOMContentLoaded', (event) => {
-    const resultTextElement = document.getElementById('flipButton');
-    const languageCode = window.Telegram.WebApp.initDataUnsafe.user.language_code || 'en';
-    resultTextElement.textContent = text[languageCode].btn;
-
-    const resultTextElement2 = document.getElementById('botName');
-    const botName = window.Telegram.WebApp.initDataUnsafe.start_param || 'Unknown';
-
-    resultTextElement2.textContent = botName;
-
+document[_0x159f33(0x1b9) + _0x159f33(0x1c6)](_0x159f33(0x1ce) + _0x159f33(0x1c9), _0x3ddf1c => {
+    const _0x21f645 = _0x159f33, _0x3c3cb8 = {
+            'ueEKY': function (_0x5e9ffc) {
+                return _0x5e9ffc();
+            },
+            'fuOby': _0x21f645(0x18b),
+            'eavyw': _0x21f645(0x185),
+            'DNDKi': _0x21f645(0x1a1),
+            'ozTJF': _0x21f645(0x17f)
+        };
+    _0x3c3cb8[_0x21f645(0x175)](displayBotUsername);
+    const _0x4e2ef8 = new URLSearchParams(window[_0x21f645(0x164)][_0x21f645(0x1bf)]), _0xfaf587 = _0x4e2ef8[_0x21f645(0x1d5)](_0x3c3cb8[_0x21f645(0x181)]) || _0x3c3cb8[_0x21f645(0x18e)], _0x15651b = document[_0x21f645(0x171) + _0x21f645(0x1a6)](_0x3c3cb8[_0x21f645(0x183)]);
+    _0x15651b[_0x21f645(0x184) + 't'] = _0xfaf587, _0x15651b[_0x21f645(0x1b2)][_0x21f645(0x1a7)] = _0x3c3cb8[_0x21f645(0x19d)];
 });
